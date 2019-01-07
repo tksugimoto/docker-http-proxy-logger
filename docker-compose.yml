@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  http-proxy:
+    build:
+      context: ./http-proxy-server/
+      args:
+        - http_proxy
+        - https_proxy
+    ports:
+      - "${HTTP_PROXY_SERVER_BIND_IP_PORT:-127.0.0.1:3128}:3128"
+    restart: always
