@@ -9,4 +9,7 @@ services:
         - https_proxy
     ports:
       - "${HTTP_PROXY_SERVER_BIND_IP_PORT:-127.0.0.1:3128}:3128"
+    environment:
+      - PROXY_FORWARDING_HOSTNAME=${PROXY_FORWARDING_HOSTNAME:-10.0.2.2}
+      - PROXY_FORWARDING_PORT=${PROXY_FORWARDING_PORT:-8080}
     restart: always
