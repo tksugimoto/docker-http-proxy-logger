@@ -17,5 +17,9 @@ EOS
 
 echo ========================
 
+echo
+echo Proxy started
+echo "  Parent proxy: http://${PROXY_FORWARDING_HOSTNAME}:${PROXY_FORWARDING_PORT}/"
+
 # -N: No daemon mode.
 exec squid -f ./squid.conf -N
