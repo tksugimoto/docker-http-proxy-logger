@@ -1,6 +1,6 @@
-FROM centos:7.6.1810
+FROM alpine:3.9
 
-RUN yum -y install squid
+RUN apk --update --no-cache add squid
 
 WORKDIR /workdir
 RUN chown squid:squid ./
