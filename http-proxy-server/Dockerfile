@@ -1,6 +1,9 @@
-FROM centos:7.6.1810
+FROM alpine:3.8
 
-RUN yum -y install squid
+RUN apk --update --no-cache add squid
+
+# TZ環境変数でタイムゾーンを変更できるようにするため
+RUN apk --update --no-cache add tzdata
 
 WORKDIR /workdir
 RUN chown squid:squid ./
