@@ -2,6 +2,9 @@ FROM alpine:3.8
 
 RUN apk --update --no-cache add squid
 
+# TZ環境変数でタイムゾーンを変更できるようにするため
+RUN apk --update --no-cache add tzdata
+
 WORKDIR /workdir
 RUN chown squid:squid ./
 
