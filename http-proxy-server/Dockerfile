@@ -1,8 +1,6 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
-# squid ver.3系を使う
-# squidユーザーでの起動がver.4だとできなかったため
-RUN apk --update --no-cache add 'squid<4'
+RUN apk --update --no-cache add 'squid<5'
 
 # TZ環境変数でタイムゾーンを変更できるようにするため
 RUN apk --update --no-cache add tzdata
