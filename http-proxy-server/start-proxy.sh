@@ -13,6 +13,9 @@ never_direct allow all
 http_access allow all
 
 http_port 3128
+
+# Avoid pid creation error when launching by squid user
+pid_filename none
 EOS
 
 echo ========================
