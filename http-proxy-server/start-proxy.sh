@@ -16,6 +16,9 @@ http_port 3128
 
 # Avoid pid creation error when launching by squid user
 pid_filename none
+
+# To reduce wait time at stop
+shutdown_lifetime 1 seconds
 EOS
 
 echo ========================
