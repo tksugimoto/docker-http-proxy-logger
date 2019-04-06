@@ -1,4 +1,4 @@
-version: '3'
+version: '2.2'
 
 services:
   http-proxy:
@@ -7,8 +7,6 @@ services:
       args:
         http_proxy:
         https_proxy:
-    volumes:
-      - squid_log:/var/log/squid/
     ports:
       - "${HTTP_PROXY_SERVER_BIND_IP_PORT:-127.0.0.1:3128}:3128"
     environment:
@@ -23,15 +21,11 @@ services:
         https_proxy:
     depends_on:
       - http-proxy
-    volumes:
-      - squid_log:/var/log/squid/
+    volumes_from:
+      - http-proxy
     command: tail -f /var/log/squid/access.log
     logging:
       driver: "json-file"
       options:
         max-size: "10mb"
         max-file: "3"
-
-volumes:
-  squid_log:
-    driver: local
