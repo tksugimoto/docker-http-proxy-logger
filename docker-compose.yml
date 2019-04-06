@@ -7,13 +7,31 @@ services:
       args:
         http_proxy:
         https_proxy:
+    volumes:
+      - squid_log:/var/log/squid/
     ports:
       - "${HTTP_PROXY_SERVER_BIND_IP_PORT:-127.0.0.1:3128}:3128"
     environment:
       TZ:
     restart: always
+
+  proxy-log:
+    build:
+      context: ./alpine-tini/
+      args:
+        http_proxy:
+        https_proxy:
+    depends_on:
+      - http-proxy
+    volumes:
+      - squid_log:/var/log/squid/
+    command: tail -f /var/log/squid/access.log
     logging:
       driver: "json-file"
       options:
         max-size: "10mb"
         max-file: "3"
+
+volumes:
+  squid_log:
+    driver: local
