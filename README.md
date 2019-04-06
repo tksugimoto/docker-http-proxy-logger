@@ -13,6 +13,7 @@
         cp .env.example .env
         ```
     1. 設定ファイル `.env` を必要に応じて編集
+        - ※ 同名の環境変数が定義されていると、 `.env` での定義より環境変数が優先される
         - ※ Docker Machine を使っている場合は、`HTTP_PROXY_SERVER_BIND_IP_PORT` には `127.0.0.0/8` のIPではなく、 `docker-machine ip` で得られるIPを設定する必要がある
             ```sh
             # コンテナ内の HTTP Proxy Server のbindをhost側につなげる際のhost側の待ち受けIP:PORT
