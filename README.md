@@ -28,6 +28,7 @@
     ```sh
     docker-compose up -d
     ```
+    - ※ 【プロキシ環境下】初回起動（ビルド）時に失敗した場合、外部からpackageをインストールするため、プロキシ情報を環境変数 or `.env` に定義する
 1. ログを閲覧
     ```sh
     docker-compose logs -f
