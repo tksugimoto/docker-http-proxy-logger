@@ -9,6 +9,7 @@ WORKDIR /workdir
 RUN chown squid:squid ./
 
 COPY ./start-proxy.sh ./
+RUN chmod 755 ./start-proxy.sh
 
 # ログを標準出力に出すために必要
 USER squid
