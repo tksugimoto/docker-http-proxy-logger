@@ -8,18 +8,18 @@ fi
 echo Generate squid.conf
 echo ========================
 
-cat << EOS | tee ./squid.conf
-access_log stdio:/dev/stdout common
+cat <<- EOS | tee ./squid.conf
+	access_log stdio:/dev/stdout common
 
-http_access allow all
+	http_access allow all
 
-http_port 3128
+	http_port 3128
 
-# Avoid pid creation error when launching by squid user
-pid_filename none
+	# Avoid pid creation error when launching by squid user
+	pid_filename none
 
-# To reduce wait time at stop
-shutdown_lifetime 1 seconds
+	# To reduce wait time at stop
+	shutdown_lifetime 1 seconds
 EOS
 
 if [ "$is_direct" != "true" ]; then
