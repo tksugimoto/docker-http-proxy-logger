@@ -5,13 +5,18 @@ if [ "$PROXY_FORWARDING_HOSTNAME" = "" ] || [ "$PROXY_FORWARDING_PORT" = "" ]; t
 	readonly is_direct=true
 fi
 
+if [ "$PROXY_AUTH_USERNAME" != "" ] && [ "$PROXY_AUTH_PASSWORD" != "" ]; then
+	readonly use_auth=true
+	# -c  Create a new file.
+	# -b  Use the password from the command line rather than prompting for it.
+	htpasswd -cb ./.squid-passwd $PROXY_AUTH_USERNAME $PROXY_AUTH_PASSWORD
+fi
+
 echo Generate squid.conf
 echo ========================
 
 cat <<- EOS | tee ./squid.conf
 	access_log stdio:/dev/stdout common
-
-	http_access allow all
 
 	http_port 3128
 
@@ -27,6 +32,23 @@ if [ "$is_direct" != "true" ]; then
 
 		cache_peer ${PROXY_FORWARDING_HOSTNAME} parent ${PROXY_FORWARDING_PORT} 0
 		never_direct allow all
+	EOS
+fi
+
+if [ "$use_auth" = "true" ]; then
+	cat <<- EOS | tee -a ./squid.conf
+
+		auth_param basic program /usr/lib/squid/basic_ncsa_auth $(pwd)/.squid-passwd
+		auth_param basic credentialsttl 48 hours
+
+		acl auth proxy_auth REQUIRED
+		http_access allow auth
+		http_access deny all
+	EOS
+else
+	cat <<- EOS | tee -a ./squid.conf
+
+		http_access allow all
 	EOS
 fi
 
