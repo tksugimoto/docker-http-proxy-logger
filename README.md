@@ -5,6 +5,7 @@
     * レスポンスは対応するリクエスト元に返却する
     * 親Proxy無しも可
 * HTTP Proxyログを出力する
+* 認証有効化可
 
 ## 使い方
 1. [docker, docker-compose をインストール](https://docs.docker.com/install/#supported-platforms)
