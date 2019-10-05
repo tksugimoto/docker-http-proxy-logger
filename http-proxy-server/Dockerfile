@@ -5,6 +5,9 @@ RUN apk --update --no-cache add 'squid<5'
 # TZ環境変数でタイムゾーンを変更できるようにするため
 RUN apk --update --no-cache add tzdata
 
+# 認証ユーザー作成用 htpasswd コマンドのinstall
+RUN apk --update --no-cache add apache2-utils
+
 WORKDIR /workdir
 RUN chown squid:squid ./
 
