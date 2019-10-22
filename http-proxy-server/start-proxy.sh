@@ -16,7 +16,8 @@ echo Generate squid.conf
 echo ========================
 
 cat <<- EOS | tee ./squid.conf
-	access_log stdio:/dev/stdout common
+	# logformat combined   %>a %[ui %[un [%tl] "%rm %ru HTTP/%rv" %>Hs %<st "%{Referer}>h" "%{User-Agent}>h" %Ss:%Sh
+	access_log stdio:/dev/stdout combined
 
 	http_port 3128
 
