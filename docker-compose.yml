@@ -16,6 +16,7 @@ services:
       PROXY_AUTH_PASSWORD:
       TZ:
     restart: always
+    dns: 8.8.8.8
     logging:
       driver: "json-file"
       options:
