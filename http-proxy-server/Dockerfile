@@ -17,4 +17,4 @@ USER squid
 CMD ["./start-proxy.sh"]
 
 COPY --chown=squid:squid ./start-proxy.sh ./
-RUN chmod 755 ./start-proxy.sh
+RUN chmod 744 ./start-proxy.sh
