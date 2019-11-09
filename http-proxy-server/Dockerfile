@@ -11,10 +11,10 @@ RUN apk add --update-cache --no-cache apache2-utils
 WORKDIR /workdir
 RUN chown squid:squid ./
 
-COPY ./start-proxy.sh ./
-RUN chmod 755 ./start-proxy.sh
-
 # ログを標準出力に出すために必要
 USER squid
 
 CMD ["./start-proxy.sh"]
+
+COPY --chown=squid:squid ./start-proxy.sh ./
+RUN chmod 755 ./start-proxy.sh
