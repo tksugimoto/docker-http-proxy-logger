@@ -1,20 +1,20 @@
-FROM alpine:3.9
+FROM alpine:3.10
 
-RUN apk --update --no-cache add 'squid<5'
+RUN apk add --update-cache --no-cache 'squid<5'
 
 # TZ環境変数でタイムゾーンを変更できるようにするため
-RUN apk --update --no-cache add tzdata
+RUN apk add --update-cache --no-cache tzdata
 
 # 認証ユーザー作成用 htpasswd コマンドのinstall
-RUN apk --update --no-cache add apache2-utils
+RUN apk add --update-cache --no-cache apache2-utils
 
 WORKDIR /workdir
 RUN chown squid:squid ./
-
-COPY ./start-proxy.sh ./
-RUN chmod 755 ./start-proxy.sh
 
 # ログを標準出力に出すために必要
 USER squid
 
 CMD ["./start-proxy.sh"]
+
+COPY --chown=squid:squid ./start-proxy.sh ./
+RUN chmod 744 ./start-proxy.sh
